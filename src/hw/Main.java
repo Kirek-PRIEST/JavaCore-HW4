@@ -50,28 +50,30 @@ public class Main {
     public static void printCelebrations(LocalDate date, Employee[] staff) {
         Holidays h = celebrating(date);
         switch (h) {
-            case MAR_8 -> {
-                System.out.println("Сегодня " + h.getHoliday() + ". Давайте поздравим этих девушек:");
-                for (Employee emp : staff) {
-                    if (emp.getGender() == Gender.FEMALE) {
-                        System.out.println(emp.getName());
-                    }
-                }
-            }
-            case FEB_23 -> {
-                System.out.println("Сегодня " + h.getHoliday() + ". Давайте поздравим этих молодых людей:");
-                for (Employee emp : staff) {
-                    if (emp.getGender() == Gender.MALE) {
-                        System.out.println(emp.getName());
-                    }
-                }
-            }
+            case MAR_8 -> printEmployees(staff, Gender.FEMALE, "Давайте поздравим этих девушек:");
+            case FEB_23 -> printEmployees(staff, Gender.MALE, "Давайте поздравим этих молодых людей:");
             case NEW_YEAR -> System.out.println("Поздравляем всех с Новым Годом!");
             default -> System.out.println("Сегодня нет праздников, но не унывайте - они уже торопятся к вам и будут совсем скоро!");
         }
 
 
     }
+
+    /**
+     * Вывод в консоль списка сотрудников в соответствии с праздником
+     * @param staff - массив сотрудников
+     * @param gender - пол сотрудника
+     * @param message - сообщение о празднике
+     */
+    private static void printEmployees(Employee[] staff, Gender gender, String message) {
+        System.out.println("Сегодня " + message);
+        for (Employee emp : staff) {
+            if (emp.getGender() == gender) {
+                System.out.println(emp.getName());
+            }
+        }
+    }
+
 
     /**
      * Метод для определения к какому празднику отнсится переданная дата
